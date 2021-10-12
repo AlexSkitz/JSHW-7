@@ -8,7 +8,7 @@
 
 var timer = makeProfileTimer();
 
-function makeProfileTimer(){
+function makeProfileTimer() {
     var t0 = performance.now();
     alert('Замеряем время работы этого alert');
     var t1 = performance.now();
@@ -20,18 +20,18 @@ function makeProfileTimer(){
 //Напишите функцию makeSaver, которая:
 
 var saver = makeSaver(Math.random) //создает функцию-хранилище результата переданной в качестве параметра функции (Math.random 
-                                      // в примере). На этом этапе Math.random НЕ вызывается
-    var value1 = saver()              //saver вызывает переданную в makeSaver функцию, запоминает результат и возвращает его
-    var value2 = saver()              //saver в дальнейшем просто хранит результат функции, и более НЕ вызывает переданную 
-                                      //в makeSaver функцию;
-    value1 === value2                 // всегда true
+// в примере). На этом этапе Math.random НЕ вызывается
+var value1 = saver()              //saver вызывает переданную в makeSaver функцию, запоминает результат и возвращает его
+var value2 = saver()              //saver в дальнейшем просто хранит результат функции, и более НЕ вызывает переданную 
+//в makeSaver функцию;
+value1 === value2                 // всегда true
 
-    var saver2 = makeSaver(() => console.log('saved function called') || [null, undefined, false, '', 0, Math.random()][Math.ceil(Math.random()*6)])
-    var value3 = saver2()
-    var value4 = saver2()
+var saver2 = makeSaver(() => console.log('saved function called') || [null, undefined, false, '', 0, Math.random()][Math.ceil(Math.random() * 6)])
+var value3 = saver2()
+var value4 = saver2()
 
-    value3 === value4 // тоже должно быть true
-    
+value3 === value4 // тоже должно быть true
+
 //Таким образом makeSaver решает две задачи:
 //Навсегда сохраняет результат функции.Это актуально, например, 
 //для Math.random.
@@ -48,6 +48,24 @@ var saver = makeSaver(Math.random) //создает функцию-хранил�
 //отсчёт в консоли, используя console.log.Используйте 
 //Self Invoked Function для создания замыкания и setTimeout для
 // задержки вывода.Результатом должно быть:
+
+let timer;
+let x = +prompt('Введите число с которого начнется отсчет:', "5")
+finalCountdown();
+function finalCountdown() {
+    console.log(x);
+    --x;
+    if (x < 0) {
+        clearTimeout(timer);
+        console.log('поехали!');
+
+    } else {
+
+        timer = setTimeout(finalCountdown, 1000);
+
+    }
+}
+
 
 
 
