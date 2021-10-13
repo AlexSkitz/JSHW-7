@@ -93,3 +93,26 @@ console.log(result(2));
 
 const result = myBind(Math.min, Math, [undefined, 4, undefined, 5, undefined, 8, undefined, 9])
 console.log(result(-1, -5, 3, 15))
+
+///////////////////////////
+
+function myBind(func, context, argsArray) {
+    return (...arg) => {
+        const resArray = argsArray.map((elem) => {
+            if (!elem) {
+                return arg.shift();
+            }
+
+            return elem;
+        });
+        const result = func.apply(context, resArray);
+        console.log(result);
+    }
+}
+
+var pow5 = myBind(Math.pow, Math, [undefined, 5]);
+pow5(3);//243
+var cube = myBind(Math.pow, Math, [undefined, 3]);
+cube(4);//64
+var chessMin = myBind(Math.min, Math, [undefined, 4, undefined, 5, undefined, 8, undefined, 9]);
+chessMin(-1, -5, 3, 15);//-5
